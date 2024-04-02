@@ -30,7 +30,7 @@ RNAseq_df <- RNAseq_df %>% rename("gene" = example_childhood_AML.gene)
 for (file in RNAseq_files){
   file_df = read.table(file, sep = "\t",header=T)
   
-#Process the file names by removing the extraneous elements that do not match the names in the metadata
+  #Process the file names by removing the extraneous elements that do not match the names in the metadata 
   #Remove the file path and .gene.txt
   file_name <- unlist(strsplit(file, split=".", fixed=TRUE))[1]
   file_name <- unlist(strsplit(file_name, split="/", fixed=TRUE))[2]
@@ -51,7 +51,7 @@ for (file in RNAseq_files){
 AML_metadata <- read.table("TARGET_AML_mRNA-seq_metadata.txt",sep="\t",header=T)
 
 #drop the columns we do not require and remove duplicate entries
-AML_metadata <- select(AML_metadata, -Source.Name, -Provider,-Material.Type, -Characteristics.Organism., -Performer, -Protocol.REF)
+AML_metadata <- dplyr::select(AML_metadata, -Source.Name, -Provider,-Material.Type, -Characteristics.Organism., -Performer, -Protocol.REF)
 AML_metadata <- unique(AML_metadata) 
 
 #Keep only the metadata that we have RNAseq data for
